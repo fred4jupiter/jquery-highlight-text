@@ -1,0 +1,12 @@
+.bold {
+	font-weight: bold;
+	background-color: yellow;
+}
+
+fieldset {
+	width: 40%;	
+}
+
+input {
+	width: 400px;
+}

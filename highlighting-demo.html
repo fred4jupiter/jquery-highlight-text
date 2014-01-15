@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="demo.css" />
+<script type="text/javascript" src="jquery-1.10.2.js"></script>
+<script type="text/javascript" src="jquery.highlight.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#searchInput,#author,#isbn").each(function() {		
+				var textStr = $.trim($(this).val());
+				if (textStr == "") {
+					return;
+				}
+				
+				if (textStr.indexOf('"') != -1) {
+					var words = textStr.match(/"[^"]*"|"[^"]*"|\S+/g);
+					for (index = 0; index < words.length; ++index) {
+						var newEntry = words[index].replace(/"/g, '');
+						$(".content *").highlight(newEntry, { element: 'span', className: 'bold' });	
+					}
+				} else {
+					var splitted = textStr.split(" ");
+					$(".content *").highlight(splitted, { element: 'span', className: 'bold' });	
+				}				
+			});						
+		});
+	</script>
+	<h1>This is the search highlighting page</h1>
+	<div class="searchbox">
+		<fieldset>
+			<legend>Searchbox</legend>
+			<label for="searchInput">Suche:</label> 
+			<input type="text" id="searchInput" /> 
+			<br />
+			<label for="author">author:</label> 
+			<input type="text" id="author" /> 
+			<br />
+			<label for="isbn">ISBN:</label> 
+			<input type="text" id="isbn" />			
+		</fieldset>		
+	</div>
+	<br />
+	<div class="content">
+		<span class="value">This is a sample code block</span>
+		<div class="contentValue">Which works. But I don't know how much of a hack this is. It looks suspicious because there is no apparent
+			function that is being returned from! You might ask, why are you doing this, Steve? Inline JS is bad practice! Well to be quite honest
+			<div class="subContentValue">
+			I'm tired of editing three different sections of code just to modify one section of a page, 
+			especially when I'm just prototyping something sample to see block if it will code work at all. It is so much easier and sometimes even makes sense for the code specifically related to this
+			HTML element to be defined right within the element: When I decide 2 minutes later that this was a terrible, terrible idea I can nuke the
+			entire div (or whatever) and I don't have a bunch of mysterious JS and CSS cruft hanging around in the rest of the page, slowing down
+			rendering ever so slightly. This is similar to the concept of locality of reference but instead of cache misses we're looking at bugs and
+			code bloat.
+			</div>
+		</div>
+		<div class="otherContent">
+			<div class="otherInnerContent">
+				<span class="importantText">When I decide 2 minutes later that this was a terrible</span>
+			</div>
+		</div>			
+	</div>
+	<br/>
+	<div class="links">
+		<a href="http://bartaz.github.io/sandbox.js/jquery.highlight.html">Used highlighting plugin</a>
+	</div>
+</body>
+</html>
